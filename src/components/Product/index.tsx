@@ -1,9 +1,26 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-// import { Container } from './styles';
 
-const Product: React.FC = () => {
-  return <h3>Hello from product</h3>;
+import { Container,Content } from './styles';
+
+interface ProductProps{
+    name: string;
+    detail:string;
+    price: string;
+    info: string;
+    image:string;
+}
+
+const Product: React.FC<ProductProps> = ({name, image}) => {
+  return (
+    <Container>
+      <img src={image} alt={name}/>
+      <Content>
+
+      </Content>
+    </Container>
+  );
 }
 
 export default Product;

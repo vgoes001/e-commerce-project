@@ -27,12 +27,15 @@ export const ContainerGroup = styled.div`
   align-items: baseline;
 
   > button{
-    border: 0;
+    border-radius: 2px;
+    padding: 2px 8px;
     background: transparent;
     margin-left: 15px;
     margin-right: 5px;
+    transition: all 0.5s ease-in-out;
+    border:0;
+    outline: 0;
   }
-
 `;
 
 
@@ -46,9 +49,4 @@ export const CartIcon = styled(FaShoppingCart)`
   width: 15px;
   margin-right: 5px;
   color: var(--secondary);
-
-
-  
- 
-
 `;
