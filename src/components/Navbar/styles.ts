@@ -5,9 +5,9 @@ import { FaStoreAlt, FaShoppingCart } from 'react-icons/fa'
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  border-bottom: 1px solid var(--gray);
 
-
+  background: var(--secondary);
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
 `;
 
 export const Nav = styled.nav`
@@ -15,7 +15,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
 
-  width: 90%;
+  width: 800px;
   height: 60px;
 
   > h3{
@@ -24,17 +24,40 @@ export const Nav = styled.nav`
 `;
 export const ContainerGroup = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: center;
+;
 
   > button{
-    border-radius: 2px;
-    padding: 2px 8px;
-    background: transparent;
-    margin-left: 15px;
-    margin-right: 5px;
-    transition: all 0.5s ease-in-out;
-    border:0;
+    display: flex;
+    justify-content: center;
     outline: 0;
+    border: 0;
+    background: none;
+    border: 1px solid #d9d9d9;
+    padding: 8px 0px;
+    color: #515151;
+    text-transform: uppercase;
+    width: 125px;
+    font-family: inherit;
+    margin-right: 5px;
+    font-weight: 500;
+    height: 33px;
+
+    &:hover {
+      background: darken(white, 2%);
+      border: 1px solid #aedaa6;
+      color: #aedaa6;
+      cursor: pointer;
+
+      > svg{
+        background: darken(white, 2%);
+        color: #aedaa6;
+        cursor: pointer;
+      }
+    }
+
+
+    }
   }
 `;
 
@@ -42,11 +65,22 @@ export const ContainerGroup = styled.div`
 export const HomeIcon = styled(FaStoreAlt)`
   height: 30px;
   width: 30px;
-  color: var(--dark);
+  color: var(--gray);
+
+  &:hover {
+      background: darken(white, 2%);
+      color: #aedaa6;
+      cursor: pointer;       
+    }
+
 `
 export const CartIcon = styled(FaShoppingCart)`
   height: 15px;
   width: 15px;
   margin-right: 5px;
-  color: var(--secondary);
+  color: var(--gray);
+
+  
+
+
 `;

@@ -11,7 +11,6 @@ const ProductList: React.FC = () => {
 
   return (
     <Container>
-      <Title title="Our products" />
       <List>
         {products.map(product => <Product key={product.name}{...product}/>)}
       </List>

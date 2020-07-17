@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 export const Container = styled.div`
-  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
 `;
 
 export const List = styled.div`
-  display: flex;
+  max-width: 650px;
   flex-wrap: wrap;
+
 `;

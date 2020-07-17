@@ -10,7 +10,7 @@ export default createGlobalStyle`
 
   body{
     -webkit-font-smoothing: antialiased;
-    background: var(---primary);
+    background: var(--primary);
     color: var(--dark);
   }
   body,input,button{
@@ -20,10 +20,10 @@ export default createGlobalStyle`
     cursor: pointer;
   }
   :root{
-    --primary: #fff;
-    --secondary: #B9161A;
-    --gray: #797A7F;
-    --dark: #2B2B2B;
+    --primary:#aedaa6;
+    --secondary: #fff;
+    --gray: #727272;
+    --darkgray: #515151;
   }
 
 `;
