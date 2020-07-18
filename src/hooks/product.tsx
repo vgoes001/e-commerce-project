@@ -2,11 +2,13 @@ import React, { useState,createContext, useContext, useCallback } from 'react'
 import data from '../data.json';
 
 type Product = Array<{
+  id:string;
   name: string;
   detail:string;
   price: string;
   info: string;
   image:string;
+  inCart: string;
 }>
 interface ProductContextData {
   products: Product;

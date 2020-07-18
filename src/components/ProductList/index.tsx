@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Container, List } from './styles';
 import Product from '../Product'
-import Title from '../Title/index'
 import {useProduct} from '../../hooks/product';
 
 const ProductList: React.FC = () => {
@@ -12,7 +11,7 @@ const ProductList: React.FC = () => {
   return (
     <Container>
       <List>
-        {products.map(product => <Product key={product.name}{...product}/>)}
+        {products.map(product => <Product key={product.id}{...product}/>)}
       </List>
     </Container>
   );

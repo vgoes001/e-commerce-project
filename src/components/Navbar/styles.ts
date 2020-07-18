@@ -25,7 +25,7 @@ export const Nav = styled.nav`
 export const ContainerGroup = styled.div`
   display: flex;
   align-items: center;
-;
+
 
   > button{
     display: flex;
@@ -58,7 +58,6 @@ export const ContainerGroup = styled.div`
 
 
     }
-  }
 `;
 
 
@@ -73,7 +72,7 @@ export const HomeIcon = styled(FaStoreAlt)`
       cursor: pointer;       
     }
 
-`
+`;
 export const CartIcon = styled(FaShoppingCart)`
   height: 15px;
   width: 15px;

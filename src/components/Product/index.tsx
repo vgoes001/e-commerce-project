@@ -1,38 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Card,HeartIcon, ImageContainer, Description, DescriptionInfo, ContainerButton} from './styles';
+import { Card,NavTitle, Content,ImageContainer,Description, ButtonContainer, HeartIcon } from './styles';
 
 interface ProductProps{
+    id: string;
     name: string;
     detail:string;
     price: string;
     info: string;
     image:string;
+    inCart: string;
 }
 
-const Product: React.FC<ProductProps> = ({name, image,detail}) => {
+const Product: React.FC<ProductProps> = ({name, image,detail, price, info, inCart}) => {
   return (
       <Card>
-        <nav>
-          <h1>CLASSIC PEACE LILY</h1>
+        <NavTitle>
+          <h1>{name}</h1>
           <HeartIcon />
-        </nav>
-        <Description>
-          <ImageContainer>
-            <img src="https://s-media-cache-ak0.pinimg.com/236x/3b/36/ca/3b36ca3afe0fa0fd4984b9eee2e154bb.jpg" alt=""/>
-          </ImageContainer>
-          <DescriptionInfo>
-            <h2>CLASSIC PEACE LILY</h2>
-            <h4>POPUPLAR HOUSE PLANT</h4>
-            <h1>$18</h1>
-            <p>Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.</p>
-            <ContainerButton>
-              <button>ADD TO CART</button>
+        </NavTitle>
+        <Content>
+            <Link to="/details">
+              <ImageContainer>
+               <img src={image} alt={name} />
+              </ImageContainer>
+            </Link>
+          <Description>
+            <h2>{name}</h2>
+            <h4>{detail}</h4>
+            <h1>{price}</h1>
+            <p>{info}</p>
+            <ButtonContainer>
+              <button 
+              disabled={inCart=== 'true' ? true: false} 
+              onClick={()=> console.log('Added to the Cart')}>
+                {`${inCart === 'false' ? 'ADD TO CART': 'IN CART'}`}
+              </button >
               <button>WISHLIST</button>
-            </ContainerButton>
-          </DescriptionInfo>
-        </Description>
+
+            </ButtonContainer>
+          </Description>
+        </Content>
       </Card>
 
   );

@@ -1,43 +1,57 @@
 [{
-	"name": "hero Product",
+	"id": "001",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
+	"price": "$99",
 	"info": "OMG This just came out today!",
-	"image": "http://placehold.it/300x300/999/CCC"
+	"image": "https://s-media-cache-ak0.pinimg.com/236x/3b/36/ca/3b36ca3afe0fa0fd4984b9eee2e154bb.jpg",
+	"inCart": "false"
 },{
-	"name": "Product 1",
+	"id": "002",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
+	"price": "$90",
 	"info": "This is the latest and greatest product from Derp corp.",
-	"image": "http://placehold.it/300x300/999/CCC"
-},{
-	"name": "Product 2",
+	"image": "https://images.unsplash.com/photo-1519241923167-9c69efe2d7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+	"inCart": "false"
+	},{
+	"id": "003",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
-	"info": "BOGOF",
-	"image": "http://placehold.it/300x300/999/CCC"
+	"price": "$49",
+	"info": "Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.",
+	"image": "https://images.unsplash.com/photo-1519336056116-bc0f1771dec8?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+	"inCart": "false"
 },{
-	"name": "Product 3",
+	"id": "004",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
-	"info": "BOGOF",
-	"image": "http://placehold.it/300x300/999/CCC"
+	"price": "$73",
+	"info": "Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.",
+	"image": "https://images.unsplash.com/photo-1590417975638-1f8d37cf22df?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+	"inCart": "true"
 },{
-	"name": "Product 4",
+	"id": "005",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
+	"price": "$122",
 	"info": "No srsly GTFO",
-	"image": "http://placehold.it/300x300/999/CCC"
+	"image": "https://images.unsplash.com/photo-1564185322807-2cadb7f17c3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+	"inCart": "false"
 },{
-	"name": "Product 5",
+	"id": "006",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
-	"info": "No srsly GTFO",
-	"image": "http://placehold.it/300x300/999/CCC"
+	"price": "$55",
+	"info": "Classic Peace Lily is a spathiphyllum floor plant arranged in a bamboo planter with a blue & red ribbom and butterfly pick.",
+	"image": "https://images.unsplash.com/photo-1587168574161-c05a6281fab4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+	"inCart": "false"
 },{
-	"name": "Product 6",
+	"id": "007",
+	"name": "Lorem ipsum dolor sit amet",
 	"detail": "Lorem ipsum dolor sit amet",
-	"price": "99",
+	"price": "$60",
 	"info": "This is the latest and greatest product from Derp corp.",
-	"image": "http://placehold.it/300x300/999/CCC"
+	"image": "https://images.unsplash.com/photo-1564060958001-a665e6fb6d3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+	"inCart": "false"
 }]
