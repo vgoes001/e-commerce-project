@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Container, List } from './styles';
-import Product from '../Product'
+import Product from '../../components/Product'
 import {useProduct} from '../../hooks/product';
 
 const ProductList: React.FC = () => {

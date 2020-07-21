@@ -1,9 +1,9 @@
 import React from 'react';
 import Navbar from '../src/components/Navbar'
-import ProductList from '../src/components/ProductList'
-import Details from '../src/components/Details'
-import Cart from '../src/components/Cart'
-import Default from '../src/components/Default'
+import ProductList from './pages/ProductList'
+import Details from './pages/Details'
+import Cart from './pages/Cart'
+import Default from './pages/Default'
 import { Switch, Route } from 'react-router-dom';
 
 

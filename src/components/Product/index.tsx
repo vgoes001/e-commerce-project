@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import Button from '../Button/index';
 import { Card,NavTitle, Content,ImageContainer,Description, ButtonContainer, HeartIcon } from './styles';
 
 interface ProductProps{
@@ -29,17 +29,9 @@ const Product: React.FC<ProductProps> = ({name, image,detail, price, info, inCar
           <Description>
             <h2>{name}</h2>
             <h4>{detail}</h4>
-            <h1>{price}</h1>
+            <h1>${price}</h1>
             <p>{info}</p>
-            <ButtonContainer>
-              <button 
-              disabled={inCart=== 'true' ? true: false} 
-              onClick={()=> console.log('Added to the Cart')}>
-                {`${inCart === 'false' ? 'ADD TO CART': 'IN CART'}`}
-              </button >
-              <button>WISHLIST</button>
 
-            </ButtonContainer>
           </Description>
         </Content>
       </Card>

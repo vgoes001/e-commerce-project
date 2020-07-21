@@ -1,5 +1,6 @@
 import React, { useState,createContext, useContext, useCallback } from 'react'
 import data from '../data.json';
+import details from '../details.json';
 
 type Product = Array<{
   id:string;
@@ -10,29 +11,49 @@ type Product = Array<{
   image:string;
   inCart: string;
 }>
+
+type Details = Array<{
+  id:string;
+  name: string;
+  detail:string;
+  info: string;
+  price: string;
+  image:string;
+  "growing-zone": string;
+  "mature-height": string;
+  "mature-width": string;
+  "classification": string;
+  "sunlight": string;
+  habit: string;
+  inCart: string;
+}>
+
 interface ProductContextData {
   products: Product;
+  productDetail: Details;
   handleDetail(): void;
-  addToCart():void;
+  addToCart(id:string):void;
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
 
 const ProductProvider: React.FC = ({children}) => {
   const [products, setProducts] = useState<Product>(data);
+const [productDetail, setProductDetail] = useState<Details>(details)
 
-  const handleDetail = useCallback(async () => {
+
+  const handleDetail = useCallback(() => {
     console.log('Hello fom detail');
   },[])
 
-  const addToCart = useCallback(async () => {
-    console.log('Hello fom add to cart');
+  const addToCart = useCallback((id: string) => {
+    console.log(`Product id ${id} added to the cart`);
   },[])
 
 
 
   return (
-    <ProductContext.Provider value={{products,addToCart, handleDetail}}>
+    <ProductContext.Provider value={{products,addToCart, handleDetail, productDetail}}>
       {children}
     </ProductContext.Provider>
   )
