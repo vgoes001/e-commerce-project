@@ -10,48 +10,34 @@ const Details: React.FC = () => {
 
   const { productDetail,addToCart } = useProduct();
 
-  useEffect(()=> {
-  }, [productDetail])
+ 
+
+
   return (
     <Container>
-      {productDetail.map( product => (
-        <Card key={product.id}>
-            <NavContainer >
+        <Card >
+            <NavContainer>
               <Link to="/" >
                 <ArroLeftIcon/>
                 <span>BACK TO ALL PLANTS</span>
               </Link>
             </NavContainer>
-  
           <Wrapper>
-            <img src={product.image} alt={product.name}/> 
+            <img src={productDetail[0].image} alt={productDetail[0].name}/> 
             <DetailsContainer>
-              <h2>{product.detail}</h2>
-            <p>{product.info}</p>
-              <span>${product.price}</span>
-              <p>Classification:</p>
-              <span>{product.classification}</span>
-              <p>Mature Height</p>
-              <p>{product["mature-height"]}</p>
-              <p>Mature Width</p>
-              <p>{product["mature-width"]}</p>
-              <p>Sunlight</p>
-              <p>{product.sunlight}</p>
+              <h2>{productDetail[0].detail}</h2>
+              <p>{productDetail[0].info}</p>
+              <span>${productDetail[0].price}</span>
               <Button 
-              disabled={product.inCart=== 'true' ? true: false} 
-              onClick={()=>addToCart(product.id)}>
-                {`${product.inCart === 'false' ? 'ADD TO CART': 'IN CART'}`}
+              disabled={productDetail[0].inCart=== true ? true: false} 
+              onClick={()=>addToCart(productDetail[0].id)}>
+                {`${productDetail[0].inCart === false ? 'ADD TO CART': 'IN CART'}`}
               </Button>
-              
-
             </DetailsContainer>
-
           </Wrapper>
         </Card>
-
-      ))}
     </Container>
-  );
+    )
 }
 
 export default Details;

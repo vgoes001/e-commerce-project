@@ -1,37 +1,28 @@
-import React, { useState,createContext, useContext, useCallback } from 'react'
-import data from '../data.json';
-import details from '../details.json';
+import React, { useState,createContext, useContext, useCallback, useEffect } from 'react'
+import data from '../data';
+import detail from '../detail';
+import { CartIcon } from '../components/Navbar/styles';
+
+
 
 type Product = Array<{
   id:string;
   name: string;
   detail:string;
-  price: string;
+  price: number;
   info: string;
   image:string;
-  inCart: string;
+  inCart: boolean;
+  count: number;
+  total: number;
 }>
 
-type Details = Array<{
-  id:string;
-  name: string;
-  detail:string;
-  info: string;
-  price: string;
-  image:string;
-  "growing-zone": string;
-  "mature-height": string;
-  "mature-width": string;
-  "classification": string;
-  "sunlight": string;
-  habit: string;
-  inCart: string;
-}>
+
 
 interface ProductContextData {
   products: Product;
-  productDetail: Details;
-  handleDetail(): void;
+  productDetail: Product;
+  handleDetail(id:string): void;
   addToCart(id:string):void;
 }
 
@@ -39,16 +30,34 @@ const ProductContext = createContext<ProductContextData>({} as ProductContextDat
 
 const ProductProvider: React.FC = ({children}) => {
   const [products, setProducts] = useState<Product>(data);
-const [productDetail, setProductDetail] = useState<Details>(details)
+  const [productDetail, setProductDetail] = useState<Product>(detail);
+  const [cart, setCart] = useState<Product>([])
 
+  const getItem = useCallback((id)=> products.find(item => item.id === id)
+   , [products]);
 
-  const handleDetail = useCallback(() => {
-    console.log('Hello fom detail');
-  },[])
+  const handleDetail = useCallback((id) => {
+    const product = getItem(id);
+    if(!product){
+      return;
+    }
+    setProductDetail([{...product}])
+  },[getItem])
 
   const addToCart = useCallback((id: string) => {
-    console.log(`Product id ${id} added to the cart`);
-  },[])
+    let tempProducts = [...products];
+    const [product] = tempProducts.filter(product => product.id === id);
+    product.inCart = true;
+    product.count = 1;
+    const price = product.price;
+    product.total = price;
+    setProducts([...tempProducts])
+    setCart([{...cart,...product}])
+  },[cart, products])
+
+  useEffect(()=> {
+    console.log(cart)
+  }, [cart])
 
 
 
