@@ -15,7 +15,7 @@ interface ProductProps{
 }
 
 const Product: React.FC<ProductProps> = ({id, name, image,detail, price, info, inCart}) => {
-  const { handleDetail, addToCart } = useProduct();
+  const { handleDetail, addToCart, openModal } = useProduct();
   return (
       <Card>
         <NavTitle>
@@ -24,7 +24,10 @@ const Product: React.FC<ProductProps> = ({id, name, image,detail, price, info, i
         </NavTitle>
         <Content>
             <Link to="/details">
-              <ImageContainer onClick ={() => handleDetail(id)}>
+              <ImageContainer onClick ={() => {
+                handleDetail(id);
+                openModal(id);
+              }}>
                <img src={image} alt={name} />
               </ImageContainer>
             </Link>

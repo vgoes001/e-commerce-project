@@ -8,7 +8,7 @@ import { Container,Wrapper, Card,NavContainer, DetailsContainer, ArroLeftIcon } 
 
 const Details: React.FC = () => {
 
-  const { productDetail,addToCart } = useProduct();
+  const { productDetail,addToCart, openModal } = useProduct();
 
  
 
@@ -30,7 +30,10 @@ const Details: React.FC = () => {
               <span>${productDetail[0].price}</span>
               <Button 
               disabled={productDetail[0].inCart=== true ? true: false} 
-              onClick={()=>addToCart(productDetail[0].id)}>
+              onClick={()=>{
+                addToCart(productDetail[0].id);
+                openModal(productDetail[0].id);
+              }}>
                 {`${productDetail[0].inCart === false ? 'ADD TO CART': 'IN CART'}`}
               </Button>
             </DetailsContainer>

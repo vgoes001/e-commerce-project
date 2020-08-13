@@ -5,6 +5,7 @@ import Details from './pages/Details'
 import Cart from './pages/Cart'
 import Default from './pages/Default'
 import { Switch, Route } from 'react-router-dom';
+import Modal from './components/Modal';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/cart" component={Cart} />
           <Route component={Default} />
         </Switch>
+        <Modal />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState,createContext, useContext, useCallback, useEffect } from 'react'
 import data from '../data';
 import detail from '../detail';
-import { CartIcon } from '../components/Navbar/styles';
 
 
 
@@ -24,6 +23,10 @@ interface ProductContextData {
   productDetail: Product;
   handleDetail(id:string): void;
   addToCart(id:string):void;
+  openModal(id:string):void;
+  closeModal(): void;
+  modalOpen: boolean;
+  modalProduct: Product;
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
@@ -32,6 +35,8 @@ const ProductProvider: React.FC = ({children}) => {
   const [products, setProducts] = useState<Product>(data);
   const [productDetail, setProductDetail] = useState<Product>(detail);
   const [cart, setCart] = useState<Product>([])
+  const [modalOpen,setModalOpen] = useState(true);
+  const [modalProduct, setModalProduct] = useState(productDetail);
 
   const getItem = useCallback((id)=> products.find(item => item.id === id)
    , [products]);
@@ -55,14 +60,25 @@ const ProductProvider: React.FC = ({children}) => {
     setCart([{...cart,...product}])
   },[cart, products])
 
-  useEffect(()=> {
-    console.log(cart)
-  }, [cart])
+  const openModal = useCallback(id=> {
+    const product = getItem(id);
+    if(!product){
+      return;
+    }
+    setModalProduct([{...product}]);
+    setModalOpen(true);
+  }, [getItem]);
+
+  const closeModal = useCallback(() => {
+    setModalOpen(false);
+  },[])
+
+
 
 
 
   return (
-    <ProductContext.Provider value={{products,addToCart, handleDetail, productDetail}}>
+    <ProductContext.Provider value={{products,addToCart, handleDetail, productDetail, modalOpen,openModal,modalProduct, closeModal}}>
       {children}
     </ProductContext.Provider>
   )
