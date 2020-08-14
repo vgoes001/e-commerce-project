@@ -1,23 +1,41 @@
 import React from 'react';
 import { useProduct } from '../../hooks/product'
+import {FiChevronLeft} from 'react-icons/fi'
+import { Container,HeaderTitle ,ModalContainer, ModalHeaderContainer, HeartIcon, Content, ContentLeft, ContentRight, ButtonContainer } from './styles';
+import Button from '../Button'
 
-import { Container, ModalContainer } from './styles';
 
 const Modal: React.FC = () => {
   const { modalOpen, closeModal, modalProduct } = useProduct();
-  const [{image, name,price }] = modalProduct;
-  console.log(modalOpen);
+  const [{image, name, price, detail, info  }] = modalProduct;
   return (
     <>
         {!modalOpen ? 
         null :
           <Container >
-          <ModalContainer>
-            <h1>Item added to the Cart</h1>
-            <img src={image} alt={name}/>
-            <h5>{name}</h5>
-            <h5>price: ${price} </h5>
-          </ModalContainer>
+            <ModalContainer >
+              <ModalHeaderContainer>
+                <HeaderTitle>
+                  <FiChevronLeft/>
+                  <h1>BACK TO ALL PLANTS</h1>
+                </HeaderTitle>
+                <HeartIcon />
+              </ModalHeaderContainer>
+
+              <Content>
+                <ContentLeft  myURL= {image} />
+                <ContentRight>
+                  <h1>{name}</h1>
+                  <h3>{detail}</h3>
+                  <span>${price}</span>
+                  <p>{info}</p>
+                  <ButtonContainer>
+                    <Button>ADD TO CART</Button>
+                    <Button>WISHLIST</Button>
+                </ButtonContainer>
+                </ContentRight>
+              </Content>
+            </ModalContainer>
         </Container>
         }
     </>
