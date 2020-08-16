@@ -14,7 +14,7 @@ export default createGlobalStyle`
     color: var(--dark);
   }
   body,input,button{
-    font-family: "Oswald", serif
+    font-family: "Raleway", serif
   }
   button{
     cursor: pointer;

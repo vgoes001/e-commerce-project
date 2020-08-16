@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useProduct } from '../../hooks/product'
 import Button from '../../components/Button'
 import { Link } from 'react-router-dom';
@@ -8,11 +8,7 @@ import { Container,Wrapper, Card,NavContainer, DetailsContainer, ArroLeftIcon } 
 
 const Details: React.FC = () => {
 
-  const { productDetail,addToCart, openModal } = useProduct();
-
- 
-
-
+  const { modalProduct,addToCart, openModal } = useProduct();
   return (
     <Container>
         <Card >
@@ -23,18 +19,18 @@ const Details: React.FC = () => {
               </Link>
             </NavContainer>
           <Wrapper>
-            <img src={productDetail[0].image} alt={productDetail[0].name}/> 
+            <img src={modalProduct.image} alt={modalProduct.name}/> 
             <DetailsContainer>
-              <h2>{productDetail[0].detail}</h2>
-              <p>{productDetail[0].info}</p>
-              <span>${productDetail[0].price}</span>
+              <h2>{modalProduct.detail}</h2>
+              <p>{modalProduct.info}</p>
+              <span>${modalProduct.price}</span>
               <Button 
-              disabled={productDetail[0].inCart=== true ? true: false} 
+              disabled={modalProduct.inCart} 
               onClick={()=>{
-                addToCart(productDetail[0].id);
-                openModal(productDetail[0].id);
+                addToCart(modalProduct.id);
+                openModal(modalProduct.id);
               }}>
-                {`${productDetail[0].inCart === false ? 'ADD TO CART': 'IN CART'}`}
+                {`${modalProduct.inCart ? 'IN CART': 'ADD TO CART'}`}
               </Button>
             </DetailsContainer>
           </Wrapper>

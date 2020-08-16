@@ -1,10 +1,9 @@
 import React, { useState,createContext, useContext, useCallback, useEffect } from 'react'
 import data from '../data';
-import detail from '../detail';
 
 
 
-type Product = Array<{
+type Products = Array<{
   id:string;
   name: string;
   detail:string;
@@ -16,9 +15,21 @@ type Product = Array<{
   total: number;
 }>
 
+interface Product {
+  id:string;
+  name: string;
+  detail:string;
+  price: number;
+  info: string;
+  image:string;
+  inCart: boolean;
+  count: number;
+  total: number;
+}
+
+
 interface ProductContextData {
-  products: Product;
-  productDetail: Product;
+  products: Products;
   handleDetail(id:string): void;
   addToCart(id:string):void;
   openModal(id:string):void;
@@ -32,16 +43,16 @@ interface ProductContextData {
   decrement(id:string):void;
   removeItem(id:string):void;
   clearCart():void;
+  cart: Products;
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
 
 const ProductProvider: React.FC = ({children}) => {
-  const [products, setProducts] = useState<Product>(data);
-  const [productDetail, setProductDetail] = useState<Product>(detail);
-  const [cart, setCart] = useState<Product>([])
+  const [products, setProducts] = useState<Products>(data);
+  const [cart, setCart] = useState<Products>([])
   const [modalOpen,setModalOpen] = useState(false);
-  const [modalProduct, setModalProduct] = useState(productDetail);
+  const [modalProduct, setModalProduct] = useState({} as Product);
   const [cartSubTotal, setCartSubTotal] = useState(0);
   const [cartTax, setCartTax] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
@@ -53,7 +64,7 @@ const ProductProvider: React.FC = ({children}) => {
     if(!product){
       return;
     }
-    setProductDetail([{...product}])
+    setModalProduct({...product})
   },[getItem])
 
   const addToCart = useCallback((id: string) => {
@@ -63,8 +74,9 @@ const ProductProvider: React.FC = ({children}) => {
     product.count = 1;
     const price = product.price;
     product.total = price;
+    setModalProduct({...product})
     setProducts([...tempProducts])
-    setCart([{...cart,...product}])
+    setCart([...cart,product])
   },[cart, products])
 
   const openModal = useCallback(id=> {
@@ -72,7 +84,7 @@ const ProductProvider: React.FC = ({children}) => {
     if(!product){
       return;
     }
-    setModalProduct([{...product}]);
+    setModalProduct({...product});
     setModalOpen(true);
   }, [getItem]);
 
@@ -103,7 +115,6 @@ const ProductProvider: React.FC = ({children}) => {
       products,
       addToCart,
       handleDetail,
-      productDetail,
       modalOpen,
       openModal,
       modalProduct,
@@ -114,7 +125,8 @@ const ProductProvider: React.FC = ({children}) => {
       increment,
       decrement,
       removeItem,
-      clearCart
+      clearCart,
+      cart
       }}>
       {children}
     </ProductContext.Provider>

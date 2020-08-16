@@ -1,10 +1,20 @@
 import React from 'react';
+import { Container, Title } from './styles';
+import { useProduct } from '../../hooks/product';
+import CartItem from '../CartItem';
 
-import { Container } from './styles';
+
 
 const CartList: React.FC = () => {
+  const { cart } = useProduct();
+
+
   return (
     <Container>
+      <Title>
+        <h1>Shopping Cart</h1>
+        <h1>{cart.length} items</h1>
+      </Title>
         <table>
           <thead>
             <tr>
@@ -15,18 +25,7 @@ const CartList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>FIFA 19</td>
-              <td>2</td>
-              <td>44.00</td>
-              <td>88.00</td>
-            </tr>
-            <tr>
-              <td>Platinum Headset</td>
-              <td>1</td>
-              <td>119.99</td>
-              <td>119.99</td>
-            </tr>
+            {cart.map( (item) => <CartItem key={item.id} item={item} />)}
           </tbody>
         </table>
     </Container>

@@ -7,7 +7,7 @@ import Button from '../Button'
 
 const Modal: React.FC = () => {
   const { modalOpen, closeModal, modalProduct,addToCart } = useProduct();
-  const [{image, name, price, detail, info, id  }] = modalProduct;
+  const {image, name, price, detail, info, id, inCart } = modalProduct;
   return (
     <>
         {!modalOpen ? 
@@ -30,7 +30,7 @@ const Modal: React.FC = () => {
                   <span>${price}</span>
                   <p>{info}</p>
                   <ButtonContainer>
-                    <Button onClick={() => addToCart(id)}>ADD TO CART</Button>
+                    <Button disabled={inCart} onClick={() => addToCart(id)}>{inCart ? 'IN CART': 'ADD TO CART'}</Button>
                     <Button>WISHLIST</Button>
                 </ButtonContainer>
                 </ContentRight>
