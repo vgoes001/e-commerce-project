@@ -16,8 +16,6 @@ type Product = Array<{
   total: number;
 }>
 
-
-
 interface ProductContextData {
   products: Product;
   productDetail: Product;
@@ -27,6 +25,13 @@ interface ProductContextData {
   closeModal(): void;
   modalOpen: boolean;
   modalProduct: Product;
+  cartSubTotal: number;
+  cartTax:number;
+  cartTotal:number;
+  increment(id:string):void;
+  decrement(id:string):void;
+  removeItem(id:string):void;
+  clearCart():void;
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
@@ -35,11 +40,13 @@ const ProductProvider: React.FC = ({children}) => {
   const [products, setProducts] = useState<Product>(data);
   const [productDetail, setProductDetail] = useState<Product>(detail);
   const [cart, setCart] = useState<Product>([])
-  const [modalOpen,setModalOpen] = useState(true);
+  const [modalOpen,setModalOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState(productDetail);
-
+  const [cartSubTotal, setCartSubTotal] = useState(0);
+  const [cartTax, setCartTax] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
   const getItem = useCallback((id)=> products.find(item => item.id === id)
-   , [products]);
+  ,[products]);
 
   const handleDetail = useCallback((id) => {
     const product = getItem(id);
@@ -73,12 +80,42 @@ const ProductProvider: React.FC = ({children}) => {
     setModalOpen(false);
   },[])
 
+  const increment = useCallback((id:string)=> {
+    console.log('this is increment method')
+  }, []);
+  const decrement = useCallback((id:string)=> {
+    console.log('this is decrement method')
+  }, []);
+
+  const removeItem = useCallback((id:string) => {
+    console.log('item removed')
+  },[])
+
+  const clearCart = useCallback(() => {
+    console.log('cart was cleared')
+  }, [])
 
 
 
 
   return (
-    <ProductContext.Provider value={{products,addToCart, handleDetail, productDetail, modalOpen,openModal,modalProduct, closeModal}}>
+    <ProductContext.Provider value={{
+      products,
+      addToCart,
+      handleDetail,
+      productDetail,
+      modalOpen,
+      openModal,
+      modalProduct,
+      closeModal,
+      cartSubTotal,
+      cartTax,
+      cartTotal,
+      increment,
+      decrement,
+      removeItem,
+      clearCart
+      }}>
       {children}
     </ProductContext.Provider>
   )

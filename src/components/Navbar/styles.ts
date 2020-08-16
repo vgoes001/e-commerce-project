@@ -26,8 +26,12 @@ export const ContainerGroup = styled.div`
   display: flex;
   align-items: center;
 
+  a{
+    text-decoration: none;
+  }
 
-  > button{
+
+  button{
     display: flex;
     justify-content: center;
     outline: 0;

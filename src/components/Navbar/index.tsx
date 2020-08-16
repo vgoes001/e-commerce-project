@@ -11,7 +11,10 @@ const Navbar: React.FC = () => {
           </Link>
           <ContainerGroup>
             <button>Products</button>
+          <Link to="/cart">
             <button><CartIcon/>Cart</button>
+          </Link>
+
             </ContainerGroup>
           </Nav>
           </Container>

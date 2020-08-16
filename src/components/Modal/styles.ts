@@ -45,6 +45,10 @@ export const HeaderTitle = styled.div`
       margin-left: 5px;
       color: var(--gray);
     }
+
+    &:hover{
+      cursor: pointer;
+    }
 `;
 
 export const HeartIcon = styled(FaRegHeart)`

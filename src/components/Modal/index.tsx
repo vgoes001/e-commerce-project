@@ -6,8 +6,8 @@ import Button from '../Button'
 
 
 const Modal: React.FC = () => {
-  const { modalOpen, closeModal, modalProduct } = useProduct();
-  const [{image, name, price, detail, info  }] = modalProduct;
+  const { modalOpen, closeModal, modalProduct,addToCart } = useProduct();
+  const [{image, name, price, detail, info, id  }] = modalProduct;
   return (
     <>
         {!modalOpen ? 
@@ -15,7 +15,7 @@ const Modal: React.FC = () => {
           <Container >
             <ModalContainer >
               <ModalHeaderContainer>
-                <HeaderTitle>
+                <HeaderTitle onClick={() => closeModal()}>
                   <FiChevronLeft/>
                   <h1>BACK TO ALL PLANTS</h1>
                 </HeaderTitle>
@@ -30,7 +30,7 @@ const Modal: React.FC = () => {
                   <span>${price}</span>
                   <p>{info}</p>
                   <ButtonContainer>
-                    <Button>ADD TO CART</Button>
+                    <Button onClick={() => addToCart(id)}>ADD TO CART</Button>
                     <Button>WISHLIST</Button>
                 </ButtonContainer>
                 </ContentRight>

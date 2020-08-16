@@ -11,7 +11,7 @@ import Modal from './components/Modal';
 function App() {
   return (
     <div className="App">
-        <Navbar></Navbar>
+        <Navbar />
         <Switch>
           <Route path="/" exact component={ProductList} />
           <Route path="/details" component={Details} />
