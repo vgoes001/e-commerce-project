@@ -33,7 +33,7 @@ const CartItem: React.FC<Product> = ({item}) => {
           </Details>
         </ProductDetail>
       <ProductCount>
-        <button onClick={() => decrement(item.id)}><FiMinus size={16} /></button>
+        <button onClick={() => decrement(item.id)}><FiMinus size={16}/></button>
         <span>{item.count}</span>
         <button onClick={() => increment(item.id)}><FiPlus size={16} /></button>
       </ProductCount>

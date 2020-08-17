@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-
   max-width: 800px;
-  padding: 20px;
+  padding: 60px;
   background: var(--secondary);
-  border-bottom: 1px solid var(--mediumgray);
   
 
   table{
     width: 100%;
-    text-align: right;
+    text-align: center;
   }
 
   th{
@@ -22,7 +20,24 @@ export const Container = styled.div`
   th:nth-child(1){
     text-align: left;
   }
-  
+  th:nth-child(4){
+    text-align: right;
+  }
+
+  > button{
+    border: none;
+    outline: none;
+    background: #FA7373;
+    color: #fff;
+    padding: 10px 15px;
+    text-transform:uppercase;
+    margin-top: 20px;
+    width: 25%;
+
+    &:hover{
+      background: darken(#FA7373, 2%);
+    }
+  }  
 `;
 
 export const Title = styled.div`

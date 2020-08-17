@@ -44,6 +44,9 @@ interface ProductContextData {
   removeItem(id:string):void;
   clearCart():void;
   cart: Products;
+  standardDelivery():void;
+  fastDelivery():void;
+  premiumDelivery():void;
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
@@ -107,8 +110,24 @@ const ProductProvider: React.FC = ({children}) => {
     console.log('cart was cleared')
   }, [])
 
+  const addTotals = useCallback(() => {
+    let subTotal = 0;
+    const myCart = cart.map(item => subTotal += item.total);
+    
 
+  },[cart]);
 
+  const standardDelivery = useCallback(() => {
+    console.log('Standard Delivery');
+  },[]);
+
+  const fastDelivery = useCallback(() => {
+    console.log('Fast Delivery');
+  },[]);
+
+  const premiumDelivery = useCallback(() => {
+    console.log('Premium Delivery');
+  },[]);
 
   return (
     <ProductContext.Provider value={{
@@ -126,7 +145,10 @@ const ProductProvider: React.FC = ({children}) => {
       decrement,
       removeItem,
       clearCart,
-      cart
+      cart,
+      standardDelivery,
+      fastDelivery,
+      premiumDelivery
       }}>
       {children}
     </ProductContext.Provider>

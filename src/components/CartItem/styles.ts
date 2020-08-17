@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.tr`
 
+  td:nth-child(4){
+    text-align: right;
+  }
+
 `;
 
 export const ProductDetail = styled.td`
@@ -57,5 +61,9 @@ export const ProductCount = styled.td`
     margin: 0 10px;
     border: 1px solid var(--mediumgray);
     padding: 5px 10px;
+  }
+
+  svg{
+    color: var(--darkgray);
   }
 `;
