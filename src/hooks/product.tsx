@@ -1,4 +1,4 @@
-import React, { useState,createContext, useContext, useCallback, useEffect } from 'react'
+import React, { useState,createContext, useContext, useCallback } from 'react'
 import data from '../data';
 
 
@@ -39,20 +39,19 @@ interface ProductContextData {
   cartSubTotal: number;
   cartTax:number;
   cartTotal:number;
+  addTotals(shippingTax?: string):void;
   increment(id:string):void;
   decrement(id:string):void;
   removeItem(id:string):void;
   clearCart():void;
   cart: Products;
-  standardDelivery():void;
-  fastDelivery():void;
-  premiumDelivery():void;
+
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
 
 const ProductProvider: React.FC = ({children}) => {
-  const [products, setProducts] = useState<Products>(data);
+  const [products, setProducts] = useState<Products>([...data]);
   const [cart, setCart] = useState<Products>([])
   const [modalOpen,setModalOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({} as Product);
@@ -106,28 +105,19 @@ const ProductProvider: React.FC = ({children}) => {
     console.log('item removed')
   },[])
 
-  const clearCart = useCallback(() => {
-    console.log('cart was cleared')
-  }, [])
 
-  const addTotals = useCallback(() => {
-    let subTotal = 0;
-    const myCart = cart.map(item => subTotal += item.total);
-    
 
+  const addTotals = useCallback((shippingTax = "5") => {
+    const subTotal = cart.reduce((total, item) => total+=item.total, 0).toFixed(2);
+    const total = cart.reduce((total, item) => total+=item.total, Number(shippingTax)).toFixed(2);
+    setCartTotal(parseFloat(total))
+    setCartSubTotal(parseFloat(subTotal))
   },[cart]);
 
-  const standardDelivery = useCallback(() => {
-    console.log('Standard Delivery');
-  },[]);
-
-  const fastDelivery = useCallback(() => {
-    console.log('Fast Delivery');
-  },[]);
-
-  const premiumDelivery = useCallback(() => {
-    console.log('Premium Delivery');
-  },[]);
+  const clearCart = useCallback(() => {
+    setCart([]);
+    setProducts([...data]);
+  }, [])
 
   return (
     <ProductContext.Provider value={{
@@ -146,9 +136,7 @@ const ProductProvider: React.FC = ({children}) => {
       removeItem,
       clearCart,
       cart,
-      standardDelivery,
-      fastDelivery,
-      premiumDelivery
+      addTotals
       }}>
       {children}
     </ProductContext.Provider>
