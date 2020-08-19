@@ -1,5 +1,4 @@
 import React, {useCallback} from 'react';
-import { Link } from 'react-router-dom';
 import { Card, Content,ImageContainer } from './styles';
 import { useProduct } from '../../hooks/product';
 
@@ -14,7 +13,7 @@ interface ProductProps{
 }
 
 const Product: React.FC<ProductProps> = ({id, name, image,detail, price, info, inCart}) => {
-  const { handleDetail, addToCart, openModal } = useProduct();
+  const { openModal } = useProduct();
 
   const truncate = useCallback((str:string, n: number)=> {
     return str?.length > n ? str.substr(0, n- 1) + '...': str

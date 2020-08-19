@@ -1,6 +1,5 @@
 import React, { useState,createContext, useContext, useCallback, useEffect } from 'react'
 import axios from 'axios';
-import { count } from 'console';
 
 
 
@@ -38,7 +37,6 @@ interface ProductContextData {
   modalOpen: boolean;
   modalProduct: Product;
   cartSubTotal: number;
-  cartTax:number;
   cartTotal:number;
   addTotals(shippingTax?: string):void;
   increment(id:string):void;
@@ -69,7 +67,6 @@ const ProductProvider: React.FC = ({children}) => {
   const [modalOpen,setModalOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({} as Product);
   const [cartSubTotal, setCartSubTotal] = useState(0);
-  const [cartTax, setCartTax] = useState(0);
   const [cartTotal, setCartTotal] = useState(0);
   const getItem = useCallback((id)=> products.find(item => item.id === id)
   ,[products]);
@@ -197,7 +194,6 @@ const ProductProvider: React.FC = ({children}) => {
       modalProduct,
       closeModal,
       cartSubTotal,
-      cartTax,
       cartTotal,
       increment,
       decrement,
