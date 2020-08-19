@@ -1,5 +1,6 @@
-import React, { useState,createContext, useContext, useCallback } from 'react'
-import data from '../data';
+import React, { useState,createContext, useContext, useCallback, useEffect } from 'react'
+import axios from 'axios';
+import { count } from 'console';
 
 
 
@@ -49,9 +50,21 @@ interface ProductContextData {
 }
 
 const ProductContext = createContext<ProductContextData>({} as ProductContextData)
-
 const ProductProvider: React.FC = ({children}) => {
-  const [products, setProducts] = useState<Products>([...data]);
+
+  
+
+  const fetchData = useCallback(async () => {
+    const response = await axios.get('https://api.jsonbin.io/b/5f3c7243af209d1016be5fba/1');
+    setProducts(response.data)
+  },[]);
+  useEffect(() => {
+    fetchData();
+    
+  }, [fetchData])
+
+
+  const [products, setProducts] = useState<Products>([]);
   const [cart, setCart] = useState<Products>([])
   const [modalOpen,setModalOpen] = useState(false);
   const [modalProduct, setModalProduct] = useState({} as Product);
@@ -81,6 +94,13 @@ const ProductProvider: React.FC = ({children}) => {
     setCart([...cart,product])
   },[cart, products])
 
+  const addTotals = useCallback((shippingTax = "5") => {
+    const subTotal = cart.reduce((total, item) => total+=item.total, 0).toFixed(2);
+    const total = cart.reduce((total, item) => total+=item.total, Number(shippingTax)).toFixed(2);
+    setCartTotal(parseFloat(total))
+    setCartSubTotal(parseFloat(subTotal))
+  },[cart]);
+
   const openModal = useCallback(id=> {
     const product = getItem(id);
     if(!product){
@@ -95,29 +115,77 @@ const ProductProvider: React.FC = ({children}) => {
   },[])
 
   const increment = useCallback((id:string)=> {
-    console.log('this is increment method')
-  }, []);
-  const decrement = useCallback((id:string)=> {
-    console.log('this is decrement method')
-  }, []);
+    let tempCart = [...cart];
+    const selectedProduct = tempCart.find(item => item.id === id);
+    if(!selectedProduct){
+      console.error('Product not found!');
+      return;
+    }
+    const index = tempCart.indexOf(selectedProduct);
+    const product = tempCart[index];
+    product.count += 1;
+    product.total = parseFloat((product.count * product.price).toFixed(2));
+    product.total.toPrecision(2);
+    setCart([...tempCart])
+    addTotals()
 
+  }, [addTotals, cart]);
+  
   const removeItem = useCallback((id:string) => {
-    console.log('item removed')
-  },[])
+    const tempProducts = [...products];
+    let tempCart = [...cart];
+
+    tempCart = tempCart.filter(item => item.id !== id);
+    
+    const getItemById = getItem(id);
+    if(!getItemById){
+      console.error('Item not found!')
+      return;
+    }
+
+    const index = tempProducts.indexOf(getItemById);
+    let removedProduct = tempProducts[index];
+    removedProduct.inCart = false;
+    removedProduct.count = 0;
+    removedProduct.total = 0;
+
+    setCart([...tempCart]);
+    setProducts([...tempProducts]);
+    addTotals();
+    
+  },[addTotals, cart, getItem, products])
+
+  const decrement = useCallback((id:string)=> {
+    let tempCart = [...cart];
+    const selectedProduct = tempCart.find(item => item.id === id);
+    if(!selectedProduct){
+      console.error('Product not found!');
+      return;
+    }
+    const index = tempCart.indexOf(selectedProduct);
+    const product = tempCart[index];
+    product.count -= 1;
+    if(product.count === 0){
+      removeItem(id);
+    }
+    product.total = parseFloat((product.count * product.price).toFixed(2));
+    addTotals();
 
 
 
-  const addTotals = useCallback((shippingTax = "5") => {
-    const subTotal = cart.reduce((total, item) => total+=item.total, 0).toFixed(2);
-    const total = cart.reduce((total, item) => total+=item.total, Number(shippingTax)).toFixed(2);
-    setCartTotal(parseFloat(total))
-    setCartSubTotal(parseFloat(subTotal))
-  },[cart]);
+  }, [addTotals, cart, removeItem]);
+
+
+
+
+
+
 
   const clearCart = useCallback(() => {
     setCart([]);
-    setProducts([...data]);
-  }, [])
+    fetchData();
+    addTotals();
+  }, [addTotals, fetchData])
 
   return (
     <ProductContext.Provider value={{
